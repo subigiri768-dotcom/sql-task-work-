@@ -37,15 +37,12 @@ CREATE TABLE Course (
     TeacherID VARCHAR(10),
     DepartmentID VARCHAR(10),
     RoomID VARCHAR(10),
-
     FOREIGN KEY (TeacherID)
-        REFERENCES Teacher(TeacherID),
-
+        REFERENCES Teacher (TeacherID),
     FOREIGN KEY (DepartmentID)
-        REFERENCES Department(DepartmentID),
-
+        REFERENCES Department (DepartmentID),
     FOREIGN KEY (RoomID)
-        REFERENCES Classroom(RoomID)
+        REFERENCES Classroom (RoomID)
 );
 
 -- enrollment table
@@ -54,12 +51,10 @@ CREATE TABLE Enrollment (
     StudentID VARCHAR(10),
     CourseID VARCHAR(10),
     Grade VARCHAR(5),
-
     FOREIGN KEY (StudentID)
-        REFERENCES Student(StudentID),
-
+        REFERENCES Student (StudentID),
     FOREIGN KEY (CourseID)
-        REFERENCES Course(CourseID)
+        REFERENCES Course (CourseID)
 );
 
 -- insert data of students
@@ -107,68 +102,82 @@ INSERT INTO Enrollment VALUES
 
 -- select query
 -- students
-SELECT * FROM Student;
+SELECT 
+    *
+FROM
+    Student;
 
 -- course 
-SELECT * FROM Course;
+SELECT 
+    *
+FROM
+    Course;
 
 -- teachers
-SELECT * FROM Teacher;
+SELECT 
+    *
+FROM
+    Teacher;
 
 -- departments
-SELECT * FROM Department;
+SELECT 
+    *
+FROM
+    Department;
 
 -- classrooms
-SELECT * FROM Classroom;
+SELECT 
+    *
+FROM
+    Classroom;
 
 -- JOIN QUERY
 -- student name and course
-SELECT
-    Student.StudentName,
-    Course.CourseName
-FROM Enrollment
-INNER JOIN Student
-ON Enrollment.StudentID = Student.StudentID
-INNER JOIN Course
-ON Enrollment.CourseID = Course.CourseID;
+SELECT 
+    Student.StudentName, Course.CourseName
+FROM
+    Enrollment
+        INNER JOIN
+    Student ON Enrollment.StudentID = Student.StudentID
+        INNER JOIN
+    Course ON Enrollment.CourseID = Course.CourseID;
 
 -- student name, course and grade
-SELECT
-    Student.StudentName,
-    Course.CourseName,
-    Enrollment.Grade
-FROM Enrollment
-INNER JOIN Student
-ON Enrollment.StudentID = Student.StudentID
-INNER JOIN Course
-ON Enrollment.CourseID = Course.CourseID;
+SELECT 
+    Student.StudentName, Course.CourseName, Enrollment.Grade
+FROM
+    Enrollment
+        INNER JOIN
+    Student ON Enrollment.StudentID = Student.StudentID
+        INNER JOIN
+    Course ON Enrollment.CourseID = Course.CourseID;
 
 -- course with teacher
-SELECT
-    Course.CourseName,
-    Teacher.TeacherName
-FROM Course
-INNER JOIN Teacher
-ON Course.TeacherID = Teacher.TeacherID;
+SELECT 
+    Course.CourseName, Teacher.TeacherName
+FROM
+    Course
+        INNER JOIN
+    Teacher ON Course.TeacherID = Teacher.TeacherID;
 
 -- course with department
-SELECT
-    Course.CourseName,
-    Department.DepartmentName
-FROM Course
-INNER JOIN Department
-ON Course.DepartmentID = Department.DepartmentID;
+SELECT 
+    Course.CourseName, Department.DepartmentName
+FROM
+    Course
+        INNER JOIN
+    Department ON Course.DepartmentID = Department.DepartmentID;
 
 -- course with classroom
-SELECT
-    Course.CourseName,
-    Classroom.RoomNumber
-FROM Course
-INNER JOIN Classroom
-ON Course.RoomID = Classroom.RoomID;
+SELECT 
+    Course.CourseName, Classroom.RoomNumber
+FROM
+    Course
+        INNER JOIN
+    Classroom ON Course.RoomID = Classroom.RoomID;
 
 -- complete student information
-SELECT
+SELECT 
     Student.StudentName,
     Student.Email,
     Course.CourseName,
@@ -176,14 +185,15 @@ SELECT
     Department.DepartmentName,
     Classroom.RoomNumber,
     Enrollment.Grade
-FROM Enrollment
-INNER JOIN Student
-ON Enrollment.StudentID = Student.StudentID
-INNER JOIN Course
-ON Enrollment.CourseID = Course.CourseID
-INNER JOIN Teacher
-ON Course.TeacherID = Teacher.TeacherID
-INNER JOIN Department
-ON Course.DepartmentID = Department.DepartmentID
-INNER JOIN Classroom
-ON Course.RoomID = Classroom.RoomID;
+FROM
+    Enrollment
+        INNER JOIN
+    Student ON Enrollment.StudentID = Student.StudentID
+        INNER JOIN
+    Course ON Enrollment.CourseID = Course.CourseID
+        INNER JOIN
+    Teacher ON Course.TeacherID = Teacher.TeacherID
+        INNER JOIN
+    Department ON Course.DepartmentID = Department.DepartmentID
+        INNER JOIN
+    Classroom ON Course.RoomID = Classroom.RoomID;
